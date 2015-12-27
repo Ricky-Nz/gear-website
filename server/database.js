@@ -55,20 +55,28 @@ export const DBReport = new Schema({
 	tags: { type: [String], required: true }
 });
 
-export function findScripts(userId) {
-	return DBScript.find({ userId }).exec();
+function buildQueries(userId, search) {
+	let find = { userId };
+	if (search) {
+		find.title = { '$regex': search };
+	}
+	return find;
 }
 
-export function findParameters(userId) {
-	return DBParameter.find({ userId }).exec();
+export function findScripts(userId, search) {
+	return DBScript.find(buildQueries(userId, search)).exec();
 }
 
-export function findPackages(userId) {
-	return DBPackage.find({ userId }).exec();
+export function findParameters(userId, search) {
+	return DBParameter.find(buildQueries(userId, search)).exec();
 }
 
-export function findReports(userId) {
-	return DBReport.find({ userId }).exec();
+export function findPackages(userId, search) {
+	return DBPackage.find(buildQueries(userId, search)).exec();
+}
+
+export function findReports(userId, search) {
+	return DBReport.find(buildQueries(userId, search)).exec();
 }
 
 export function findUser(username, password) {

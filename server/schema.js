@@ -207,27 +207,47 @@ var GraphQLUser = new GraphQLObjectType({
 		id: globalIdField('User', user => user._id),
 		scripts: {
 			type: ScriptsConnection,
-			args: connectionArgs,
-			resolve: (user, args) =>
-				findScripts(user._id).then(scripts => connectionFromArray(scripts, args))
+			args: {
+				search: {
+					type: GraphQLString
+				},
+				...connectionArgs
+			},
+			resolve: (user, {search, ...args}) =>
+				findScripts(user._id, search).then(scripts => connectionFromArray(scripts, args))
 		},
 		parameters: {
 			type: ParametersConnection,
-			args: connectionArgs,
-			resolve: (user, args) =>
-				findParameters(user._id).then(parameters => connectionFromArray(parameters, args))
+			args: {
+				search: {
+					type: GraphQLString
+				},
+				...connectionArgs
+			},
+			resolve: (user, {search, ...args}) =>
+				findParameters(user._id, search).then(parameters => connectionFromArray(parameters, args))
 		},
 		packages: {
 			type: PackagesConnection,
-			args: connectionArgs,
-			resolve: (user, args) =>
-				findPackages(user._id).then(packages => connectionFromArray(packages, args))
+			args: {
+				search: {
+					type: GraphQLString
+				},
+				...connectionArgs
+			},
+			resolve: (user, {search, ...args}) =>
+				findPackages(user._id, search).then(packages => connectionFromArray(packages, args))
 		},
 		reports: {
 			type: ReportsConnection,
-			args: connectionArgs,
-			resolve: (user, args) =>
-				findReports(user._id).then(reports => connectionFromArray(reports, args))
+			args: {
+				search: {
+					type: GraphQLString
+				},
+				...connectionArgs
+			},
+			resolve: (user, {search, ...args}) =>
+				findReports(user._id, search).then(reports => connectionFromArray(reports, args))
 		}
 	})
 });
