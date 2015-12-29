@@ -1,28 +1,27 @@
 import React from 'react';
 import Relay from 'react-relay';
 import ReactDOM from 'react-dom';
-import { AppBar, IconButton, NavigationClose } from 'material-ui';
+import ScriptTab from './components/ScriptTab';
+import ParameterTab from './components/ScriptTab';
+import ReportTab from './components/ScriptTab';
+import HomeTab from './components/HomeTab';
+import GuideTab from './components/GuideTab';
 
 import { IndexRoute, Route } from 'react-router';
 import { RelayRouter } from 'react-router-relay';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-
-import RootQueries from './queries/RootQueries';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
+import RootQueries from './queries/UserQueries';
+import RootQueries from './queries/Queries';
 
 Relay.injectNetworkLayer(
 	new Relay.DefaultNetworkLayer('/api/graphql')
 );
 
-class Root extends React.Component {
+class Application extends React.Component {
 	render() {
 		return (
 			<div>
-				<AppBar title="Title"
-					iconClassNameRight="muidocs-icon-navigation-expand-more" />
-				<IconButton iconClassName="muidocs-icon-custom-github" tooltip="GitHub"/>
+				{this.props.children}
 			</div>
 		);
 	}
@@ -30,8 +29,14 @@ class Root extends React.Component {
 
 ReactDOM.render(
 	<RelayRouter history={createBrowserHistory()}>
-		<Route path='/' component={Root}>
-
+		<Route path='/' component={Application}>
+			<IndexRoute component={HomeTab} queries={}/>
+			<Route path='script' component={ScriptTab}
+				queries={RootQueries} queryParams={['select']}>
+			<Route path='parameter' component={ParameterTab}
+				queries={RootQueries} queryParams={['select']}>
+			<Route path='report' component={ReportTab}
+				queries={RootQueries} queryParams={['select']}>
 		</Route>
 	</RelayRouter>,
 	document.getElementById('root')

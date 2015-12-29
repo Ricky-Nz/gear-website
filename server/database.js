@@ -26,20 +26,25 @@ let parameterSchema = new Schema({
 parameterSchema.index({ userId: 1, key: 1 }, { unique: true });
 export const DBParameter = mongoose.model('DBParameter', parameterSchema);
 
-let actionSchema = new Schema({
+const actionSchema = new Schema({
 	type: { type: String, required: true },
-	find: { type: String },
-	args: { type: String }
+	args: { type: String },
+	findType: { type: String },
+	findArgs: { type: String }
 });
 
-let scriptSchema = new Schema({
+export const DBScript = mongoose.model('DBScript', new Schema({
 	userId: { type: Schema.Types.ObjectId, required: true },
 	title: { type: String, required: true },
 	tags: { type: [String], required: true },
 	date: { type: Date, required: true },
 	actions: { type: [actionSchema], required: true }
+}));
+
+const recordScriptSchema = new Schema({
+	title: { type: String, required: true },
+	actions: { type: [String], required: true }
 });
-export const DBScript = mongoose.model('DBScript', scriptSchema);
 
 export const DBReport = new Schema({
 	userId: { type: Schema.Types,ObjectId, required: true },
@@ -51,7 +56,7 @@ export const DBReport = new Schema({
 	packageDate: { type: String, required: true },
 	packageDescription: { type: String },
 	packagePath: { type: String, required: true },
-	scripts: { type: [scriptSchema], required: true },
+	scripts: { type: [recordScriptSchema], required: true },
 	tags: { type: [String], required: true }
 });
 
