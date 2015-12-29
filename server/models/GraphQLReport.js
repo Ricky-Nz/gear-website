@@ -1,10 +1,13 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { globalIdField } from 'graphql-relay';
 import GraphQLScriptRecord from './GraphQLScriptRecord';
+import GraphQLLabel from './GraphQLLabel';
 
 export default const GraphQLReport = new GraphQLObjectType({
 	name: 'Report',
 	description: 'Test report.',
 	fields: () => ({
+		id: globalIdField('Report', report => report._id),
 		startTime: {
 			type: GraphQLString,
 			description: 'test start time'
@@ -30,7 +33,7 @@ export default const GraphQLReport = new GraphQLObjectType({
 			description: 'test runned scripts.'
 		},
 		labels: {
-			type: new GraphQLList(GraphQLString),
+			type: new GraphQLList(GraphQLLabel),
 			description: 'run labels.'
 		}
 	})
