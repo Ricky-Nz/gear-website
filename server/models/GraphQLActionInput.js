@@ -6,7 +6,7 @@ import {
 
 export default const GraphQLActionInput = new GraphQLInputObjectType({
 	name: 'ActionInput',
-	description: 'Script action input.',
+	description: 'script action input.',
 	fields: () => ({
 		type: {
 			type: new GraphQLNonNull(GraphQLString),

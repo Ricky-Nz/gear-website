@@ -1,65 +1,38 @@
+import { GraphQLString, GraphQLID } from 'graphql';
+import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
+import { updateScript } from '../database';
+import { GraphQLScript, GraphQLActionInput } from '../models';
+
 export default const updateScriptMutation = mutationWithClientMutationId({
-	name: 'UpdateProject',
+	name: 'UpdateScript',
+	description: 'update test script',
 	inputFields: {
-		password: {
-			type: new GraphQLNonNull(GraphQLString)
-		},
 		id: {
-			type: new GraphQLNonNull(GraphQLID)
+			type: new GraphQLNonNull(GraphQLID),
+			description: 'script id'
 		},
-		name: {
-			type: GraphQLString
-		},
-		order: {
-			type: GraphQLString
-		},
-		category: {
-			type: GraphQLString
-		},
-		index: {
-			type: GraphQLString
-		},
-		promote: {
-			type: GraphQLString
-		},
-		location: {
-			type: GraphQLString
-		},
-		type: {
-			type: GraphQLString
-		},
-		area: {
-			type: GraphQLString
-		},
-		status: {
-			type: GraphQLString
-		},
-		banner: {
-			type: GraphQLString
-		},
-		thumbnail: {
-			type: GraphQLString
+		title: {
+			type: GraphQLString,
+			description: 'script title'
 		},
 		labels: {
-			type: new GraphQLList(GraphQLString)
+			type: new GraphQLList(GraphQLID),
+			description: 'label ids'
 		},
-		segments: {
-			type: new GraphQLList(GraphQLSegmentInput)
+		actions: {
+			type: new GraphQLList(GraphQLActionInput),
+			description: 'script actions'
 		}
 	},
 	outputFields: {
-		project: {
-			type: GraphQLProject,
-			resolve: (projectId) => findProjectById(projectId)
-				.then(project => project)
+		script: {
+			type: GraphQLScript,
+			resolve: (script) => script
 		}
 	},
-	mutateAndGetPayload: ({password, ...fields}, {rootValue}) => {
-		if (confirmPassword(password)) {
-			return updateProject(fields, rootValue.request.files)
-				.then(project => project._id);
-		} else {
-			return null;
-		}
+	mutateAndGetPayload: ({id: globalId, ...fields}) => {
+		const {type, id} = fromGlobalId(globalId);
+		return updateScript({id, ...fields}).then(script => script);
 	}
 });
+

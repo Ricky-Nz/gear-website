@@ -1,15 +1,31 @@
-import { GraphQLNonNull, GraphQLObjectType,
-	GraphQLString, GraphQLSchema } from 'graphql';
-import { GraphQLUser } from './models';
-import { createScriptMutation, updateScriptMutation, removeScriptMutation,
-	createParameterMutation, updateParameterMutation, removeParameterMutation,
-	createReportMutation, removeReportMutation } from './mutations';
+import {
+	GraphQLNonNull,
+	GraphQLObjectType,
+	GraphQLString,
+	GraphQLSchema
+} from 'graphql';
+
+import {
+	GraphQLUser
+} from './models';
+
+import {
+	createParameterMutation,
+	updateParameterMutation,
+	removeParameterMutation,
+	createScriptMutation,
+	updateScriptMutation,
+	removeScriptMutation,
+	createReportMutation,
+	removeReportMutation
+} from './mutations';
 
 var GraphQLQuery = new GraphQLObjectType({
 	name: 'Query',
 	fields: () => ({
 		user: {
 			type: GraphQLUser,
+			description: 'application user',
 			args: {
 				username: {
 					type: new GraphQLNonNull(GraphQLString)

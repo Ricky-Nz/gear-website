@@ -1,34 +1,48 @@
+import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
+import { mutationWithClientMutationId, fromGlobalId, cursorForObjectInConnection } from 'graphql-relay';
+import { getUserById, createScript, findScripts } from '../database';
+import { GraphQLScript, GraphQLScriptEdge, GraphQLActionInput } from '../models';
+import _ from 'underscore';
+
 export default const createScriptMutation = mutationWithClientMutationId({
 	name: 'CreateScript',
+	description: 'create automation test script',
 	inputFields: {
-		sessionId: {
-			type: new GraphQLNonNull(GraphQLString)
+		userId: {
+			type: new GraphQLNonNull(GraphQLID),
+			description: 'user id'
 		},
 		title: {
-			type: new GraphQLNonNull(GraphQLString)
+			type: new GraphQLNonNull(GraphQLString),
+			description: 'script title'
 		},
-		tags: {
-			type: new GraphQLList(GraphQLString)
+		labels: {
+			type: new GraphQLList(GraphQLID),
+			description: 'label ids'
 		},
 		actions: {
-			type: new GraphQLList(GraphQLActionInput)
+			type: new GraphQLList(GraphQLActionInput),
+			description: 'script actions'
 		}
 	},
 	outputFields: {
 		scriptEdge: {
 			type: GraphQLScriptEdge,
-			resolve: ({scriptId, userId}) =>
+			resolve: ({userId, scriptId}) =>
 				findScripts(userId).then(scripts => {
-						const newScript = _.find(scripts, script => script._id.toString() === scriptId.toString());
-						return {
-							cursor: cursorForObjectInConnection(scripts, newScript),
-							node: newScript
-						};
-					})
+					const newItem = _.find(scripts, script =>
+						script._id.toString() === scriptId.toString());
+					return {
+						cursor: cursorForObjectInConnection(scripts, newItem),
+						node: newItem
+					};
+				})
 		}
 	},
-	mutateAndGetPayload: ({sessionId, ...fields}) =>
-		findUseBySession(sessionId).then(user =>
-			createScript({userId: user._id, ...fields}).then(newScript =>
-				({userId: newScript.userId, scriptId: newScript._id})))
+	mutateAndGetPayload: ({userId, ...fields}) => {
+		const {type, id} = fromGlobalId(userId);
+		return getUserById(id).then(user =>
+			createScript({userId: id, ...fields}).then(script => ({userId: id, scriptId: script._id})));
+	}
 });
+

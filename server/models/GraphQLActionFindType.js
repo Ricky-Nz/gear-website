@@ -4,7 +4,7 @@ import {
 	GraphQLBoolean
 } from 'graphql';
 
-export default const GraphQLActionType = new GraphQLObjectType({
+export default const GraphQLActionFindType = new GraphQLObjectType({
 	name: 'ActionType',
 	description: 'Action support find element methods.',
 	fields: {
