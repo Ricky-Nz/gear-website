@@ -4,7 +4,7 @@ import {
 	GraphQLString
 } from 'graphql';
 
-export default const GraphQLActionInput = new GraphQLInputObjectType({
+export default new GraphQLInputObjectType({
 	name: 'ActionInput',
 	description: 'script action input.',
 	fields: () => ({

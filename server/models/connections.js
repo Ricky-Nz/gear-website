@@ -27,10 +27,12 @@ const {
 	nodeType: GraphQLReport
 });
 
-export ScriptsConnection;
-export GraphQLScriptEdge;
-export ParametersConnection;
-export GraphQLParameterEdge;
-export ReportsConnection;
-export GraphQLReportEdge;
+export {
+	ScriptsConnection,
+	GraphQLScriptEdge,
+	ParametersConnection,
+	GraphQLParameterEdge,
+	ReportsConnection,
+	GraphQLReportEdge
+}
 

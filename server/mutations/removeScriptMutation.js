@@ -1,9 +1,9 @@
-import { GraphQLID } from 'graphql';
+import { GraphQLID, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 import { removeScript } from '../database';
 import { GraphQLScript } from '../models';
 
-export default const removeScriptMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'RemoveScript',
 	description: 'delete test script',
 	inputFields: {

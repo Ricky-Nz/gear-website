@@ -27,6 +27,7 @@
     "mongoose": "^4.3.0",
     "multer": "^1.1.0",
     "react": "^0.14.3",
+    "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.3",
     "react-relay": "^0.6.0",
     "react-router": "^1.0.3",

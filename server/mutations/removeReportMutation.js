@@ -1,9 +1,9 @@
-import { GraphQLID } from 'graphql';
+import { GraphQLID, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 import { removeReport } from '../database';
 import { GraphQLReport } from '../models';
 
-export default const removeReportMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'RemoveReport',
 	description: 'remove test report',
 	inputFields: {

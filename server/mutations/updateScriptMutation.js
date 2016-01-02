@@ -1,9 +1,9 @@
-import { GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLString, GraphQLID, GraphQLNonNull, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 import { updateScript } from '../database';
 import { GraphQLScript, GraphQLActionInput } from '../models';
 
-export default const updateScriptMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'UpdateScript',
 	description: 'update test script',
 	inputFields: {

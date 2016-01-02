@@ -1,10 +1,10 @@
-import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLString, GraphQLID, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId, cursorForObjectInConnection } from 'graphql-relay';
 import { getUserById, createScript, findScripts } from '../database';
-import { GraphQLScript, GraphQLScriptEdge, GraphQLActionInput } from '../models';
+import { GraphQLScriptEdge, GraphQLActionInput, GraphQLScriptRecord } from '../models';
 import _ from 'underscore';
 
-export default const createScriptMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'CreateScript',
 	description: 'create automation test script',
 	inputFields: {

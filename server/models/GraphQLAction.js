@@ -1,6 +1,6 @@
-import { GraphQLString } from 'graphql';
+import { GraphQLString, GraphQLObjectType } from 'graphql';
 
-export default const GraphQLAction = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'Action',
 	description: 'Script action.',
 	fields: () => ({

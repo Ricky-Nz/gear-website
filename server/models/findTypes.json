@@ -1,0 +1,14 @@
+[
+	{ name: "Id" },
+	{ name: "Name" },
+	{ name: "ClassName" },
+	{ name: "TagName" },
+	{ name: "XPath" },
+	{ name: "IosUIAutomation" },
+	{ name: "AndroidUIAutomator" },
+	{ name: "AccessibilityId" },
+	{ name: "LinkText" },
+	{ name: "PartialLinkText" },
+	{ name: "Css" },
+	{ name: "CssSelector" }
+]

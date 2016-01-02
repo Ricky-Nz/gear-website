@@ -8,6 +8,8 @@ import GraphQLParameter from './GraphQLParameter';
 import GraphQLReport from './GraphQLReport';
 import GraphQLScript from './GraphQLScript';
 import GraphQLScriptRecord from './GraphQLScriptRecord';
+import GraphQLLabelInput from './GraphQLLabelInput';
+import GraphQLScriptRecordInput from './GraphQLScriptRecordInput';
 import connections from './connections';
 
 export {
@@ -21,5 +23,7 @@ export {
 	GraphQLReport,
 	GraphQLScript,
 	GraphQLScriptRecord,
-	...connections
+	GraphQLLabelInput,
+	GraphQLScriptRecordInput
 };
+

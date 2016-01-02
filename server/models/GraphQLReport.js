@@ -3,7 +3,7 @@ import { globalIdField } from 'graphql-relay';
 import GraphQLScriptRecord from './GraphQLScriptRecord';
 import GraphQLLabel from './GraphQLLabel';
 
-export default const GraphQLReport = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'Report',
 	description: 'Test report.',
 	fields: () => ({

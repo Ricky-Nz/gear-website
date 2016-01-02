@@ -1,6 +1,6 @@
 import { GraphQLString, GraphQLInputObjectType } from 'graphql';
 
-export default const GraphQLScriptRecordInput = new GraphQLInputObjectType({
+export default new GraphQLInputObjectType({
 	name: 'ScriptRecord',
 	description: 'Script run record',
 	fields: () => ({

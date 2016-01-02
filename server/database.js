@@ -49,7 +49,7 @@ const scriptRecordSchema = new Schema({
 });
 
 const DBReport = new Schema({
-	userId: { type: Schema.Types,ObjectId, required: true },
+	userId: { type: Schema.Types.ObjectId, required: true },
 	startTime: { type: Date, required: true },
 	endTime: { type: Date, required: true },
 	platform: { type: String, required: true },

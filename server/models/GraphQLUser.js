@@ -1,11 +1,18 @@
-import { GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLNonNull, GraphQLString,
+	GraphQLID, GraphQLList } from 'graphql';
 import { globalIdField, fromGlobalId, connectionArgs, connectionFromArray } from 'graphql-relay';
 import { ScriptsConnection, ParametersConnection, ReportsConnection } from './connections';
+import { findScripts, findLabels } from '../database';
 import GraphQLScript from './GraphQLScript';
 import GraphQLParameter from './GraphQLParameter';
 import GraphQLReport from './GraphQLReport';
+import GraphQLLabel from './GraphQLLabel';
+import GraphQLActionType from './GraphQLActionType';
+import GraphQLActionFindType from './GraphQLActionFindType';
+import path from 'path';
+import fs from 'fs-extra';
 
-export default const GraphQLUser = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'User',
 	description: 'application user.',
 	fields: () => ({
@@ -48,6 +55,25 @@ export default const GraphQLUser = new GraphQLObjectType({
 			},
 			resolve: (user, {search, ...args}) =>
 				findReports(user._id, search).then(reports => connectionFromArray(reports, args))
+		},
+		labels: {
+			type: new GraphQLList(GraphQLLabel),
+			args: {
+				search: {
+					type: GraphQLString,
+					description: 'search label by name.'
+				}
+			},
+			resolve: (user, {search}) =>
+				findLabels(user._id, search).then(labels => labels)
+		},
+		actionTypes: {
+			type: new GraphQLList(GraphQLActionType),
+			resolve: (user) => fs.readJsonSync(path.join(__dirname, 'actionTypes'))
+		},
+		findTypes: {
+			type: new GraphQLList(GraphQLActionFindType),
+			resolve: (user) => fs.readJsonSync(path.join(__dirname, 'findTypes'))
 		},
 		script: {
 			type: GraphQLScript,

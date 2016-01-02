@@ -1,10 +1,10 @@
-import { GraphQLNonNull, GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLString, GraphQLID, GraphQLList } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId, cursorForObjectInConnection } from 'graphql-relay';
 import { getUserById, createReport, findReports } from '../database';
 import { GraphQLReport, GraphQLReportEdge, GraphQLScriptRecordInput, GraphQLLabelInput } from '../models';
 import _ from 'underscore';
 
-export default const createReportMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'CreateReport',
 	description: 'create automation test report.',
 	inputFields: {

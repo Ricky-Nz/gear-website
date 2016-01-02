@@ -1,6 +1,6 @@
 import { GraphQLInputObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
 
-export default const GraphQLLabelInput = new GraphQLInputObjectType({
+export default new GraphQLInputObjectType({
 	name: 'Label',
 	description: 'script label input',
 	fields: () => ({

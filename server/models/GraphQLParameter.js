@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-export default const GraphQLParameter = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'Parameter',
 	description: 'Script global parameter',
 	fields: () => ({

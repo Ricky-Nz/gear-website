@@ -1,7 +1,7 @@
 import { GraphQLString, GraphQLObjectType } from 'graphql';
 import GraphQLLabel from './GraphQLLabel';
 
-export default const GraphQLScriptRecord = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'ScriptRecord',
 	description: 'Script run record',
 	fields: () => ({

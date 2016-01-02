@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-export default const GraphQLLabel = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'Label',
 	description: 'script label',
 	fields: () => ({

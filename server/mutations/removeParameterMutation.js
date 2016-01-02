@@ -1,9 +1,9 @@
-import { GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLString, GraphQLID, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 import { removeParameter } from '../database';
 import { GraphQLParameter } from '../models';
 
-export default const removeParameterMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'RemoveParameter',
 	description: 'remove script parameter',
 	inputFields: {

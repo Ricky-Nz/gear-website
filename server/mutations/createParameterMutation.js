@@ -4,7 +4,7 @@ import { getUserById, createParameter, findParameters } from '../database';
 import { GraphQLParameter, GraphQLParameterEdge } from '../models';
 import _ from 'underscore';
 
-export default const createParameterMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'CreateParameter',
 	inputFields: {
 		userId: {

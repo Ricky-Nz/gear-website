@@ -1,9 +1,9 @@
-import { GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLString, GraphQLID, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId, fromGlobalId } from 'graphql-relay';
 import { updateParameter } from '../database';
 import { GraphQLParameter } from '../models';
 
-export default const updateParameterMutation = mutationWithClientMutationId({
+export default mutationWithClientMutationId({
 	name: 'UpdateParameter',
 	description: 'update script parameter value',
 	inputFields: {

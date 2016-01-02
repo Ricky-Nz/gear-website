@@ -1,0 +1,72 @@
+[
+	{
+		name: "Click",
+		args: false,
+		needTarget: true
+	},
+	{
+		name: "Input",
+		args: true,
+		needTarget: true
+	},
+	{
+		name: "Touch",
+		args: true,
+		regex: "/\((\d*\.?\d+), ?(\d*\.?\d+)\)/g",
+		help: "plaese follow this format: (x_number, y_number)",
+		needTarget: false
+	},
+	{
+		name: "TouchRelative",
+		args: true,
+		regex: "/\((0\.\d+), ?(0\.\d+)\)/g",
+		help: "plaese follow this format: (0.x_precentage, 0.y_precentage)",
+		needTarget: false
+	},
+	{
+		name: "ClearInput",
+		args: false
+		needTarget: false
+	},
+	{
+		name: "FlickUp",
+		args: true,
+		regex: "/^[0-9]*$/g",
+		help: "enter the distance in pixel.",
+		needTarget: false
+	},
+	{
+		name: "FlickDown",
+		args: true,
+		regex: "/^[0-9]*$/g",
+		help: "enter the distance in pixel.",
+		needTarget: false
+	},
+	{
+		name: "FlickLeft",
+		args: true,
+		regex: "/^[0-9]*$/g",
+		help: "enter the distance in pixel.",
+		needTarget: false
+	},
+	{
+		name: "FlickRight",
+		args: true,
+		regex: "/^[0-9]*$/g",
+		help: "enter the distance in pixel.",
+		needTarget: false
+	},
+	{
+		name: "Back",
+		args: false,
+		needTarget: false
+	},
+	{
+		name: "Wait",
+		args: true,
+		regex: "^[0-9]*$",
+		help: "number in milliseconds to wait.",
+		needTarget: false
+	}
+]
+

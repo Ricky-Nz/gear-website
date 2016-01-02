@@ -4,7 +4,7 @@ import { globalIdField } from 'graphql-relay';
 import GraphQLAction from './GraphQLAction';
 import GraphQLLabel from './GraphQLLabel';
 
-export default const GraphQLScript = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'Script',
 	description: 'Automation test script.',
 	fields: () => ({

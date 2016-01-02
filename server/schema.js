@@ -2,11 +2,13 @@ import {
 	GraphQLNonNull,
 	GraphQLObjectType,
 	GraphQLString,
+	GraphQLList,
 	GraphQLSchema
 } from 'graphql';
 
 import {
-	GraphQLUser
+	GraphQLUser,
+	GraphQLAppVersion
 } from './models';
 
 import {
@@ -19,6 +21,10 @@ import {
 	createReportMutation,
 	removeReportMutation
 } from './mutations';
+
+import fs from 'fs-extra';
+import path from 'path';
+import { getUser } from './database';
 
 var GraphQLQuery = new GraphQLObjectType({
 	name: 'Query',
@@ -34,8 +40,19 @@ var GraphQLQuery = new GraphQLObjectType({
 					type: new GraphQLNonNull(GraphQLString)
 				}
 			},
-			resolve: (root, { username, password }) =>
-				findUser(username, password).then(user => user)
+			resolve: (root, {username, password}) =>
+				getUser(username, password).then(user => user)
+		},
+		versions: {
+			type: new GraphQLList(GraphQLAppVersion),
+			resolve: (root) => {
+				var versionFiles = fs.readdirSync(path.join(__dirname, 'versions'));
+				versionFiles = versionFiles.reverse();
+				return versionFiles.map(version => ({
+					version: version,
+					download: `/versions/${version}`
+				}));
+			}
 		}
 	})
 });

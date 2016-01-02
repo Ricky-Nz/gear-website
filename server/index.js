@@ -20,6 +20,7 @@ graphQLServer.use('/api', graphQLHTTP(req => ({
 	schema,
 	rootValue: { request: req }
 })));
+graphQLServer.use('/versions', express.static(path.join(__dirname, 'versions')));
 graphQLServer.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 graphQLServer.use(express.static(path.join(__dirname, '..', 'dist')));
 graphQLServer.get('*', function (request, response){

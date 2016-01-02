@@ -4,7 +4,7 @@ import {
 	GraphQLBoolean
 } from 'graphql';
 
-export default const GraphQLActionType = new GraphQLObjectType({
+export default new GraphQLObjectType({
 	name: 'ActionType',
 	description: 'Script support action types',
 	fields: {
@@ -23,6 +23,11 @@ export default const GraphQLActionType = new GraphQLObjectType({
 		help: {
 			type: GraphQLString,
 			description: 'help messages.'
+		},
+		needTarget: {
+			type: GraphQLBoolean,
+			description: 'whether this action need a target.'
 		}
 	}
-})
+});
+
