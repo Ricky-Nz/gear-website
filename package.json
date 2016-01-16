@@ -17,6 +17,7 @@
   "author": "Ruiqi",
   "license": "ISC",
   "dependencies": {
+    "babel-relay-plugin": "^0.6.3",
     "express": "^4.13.3",
     "express-graphql": "^0.4.5",
     "fs-extra": "^0.26.2",
@@ -27,11 +28,11 @@
     "mongoose": "^4.3.0",
     "multer": "^1.1.0",
     "react": "^0.14.6",
-    "react-bootstrap": "^0.28.1",
+    "react-bootstrap": "^0.28.2",
     "react-dom": "^0.14.6",
-    "react-relay": "^0.6.0",
-    "react-router": "^1.0.3",
-    "react-router-relay": "^0.8.0",
+    "react-relay": "^0.6.1",
+    "react-router": "^2.0.0-rc5",
+    "react-router-relay": "^0.9.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
