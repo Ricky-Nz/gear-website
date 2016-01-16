@@ -10,7 +10,9 @@ import GraphQLScript from './GraphQLScript';
 import GraphQLScriptRecord from './GraphQLScriptRecord';
 import GraphQLLabelInput from './GraphQLLabelInput';
 import GraphQLScriptRecordInput from './GraphQLScriptRecordInput';
-import connections from './connections';
+import GraphQLAppVersion from './GraphQLAppVersion';
+import { ScriptsConnection, GraphQLScriptEdge, ParametersConnection,
+	GraphQLParameterEdge, ReportsConnection, GraphQLReportEdge } from './connections';
 
 export {
 	GraphQLUser,
@@ -24,6 +26,13 @@ export {
 	GraphQLScript,
 	GraphQLScriptRecord,
 	GraphQLLabelInput,
-	GraphQLScriptRecordInput
+	GraphQLScriptRecordInput,
+	GraphQLAppVersion,
+	ScriptsConnection,
+	GraphQLScriptEdge,
+	ParametersConnection,
+	GraphQLParameterEdge,
+	ReportsConnection,
+	GraphQLReportEdge
 };
 

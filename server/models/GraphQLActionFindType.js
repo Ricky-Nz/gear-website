@@ -1,11 +1,7 @@
-import { 
-	GraphQLObjectType,
-	GraphQLString,
-	GraphQLBoolean
-} from 'graphql';
+import { GraphQLObjectType, GraphQLString } from 'graphql';
 
 export default new GraphQLObjectType({
-	name: 'ActionType',
+	name: 'ActionFindType',
 	description: 'Action support find element methods.',
 	fields: {
 		name: {

@@ -1,41 +1,98 @@
-type App {
-  id: ID!
-  bannerCount: Int
-  categories: [String]
-  labels: [String]
-  projectTypes: [String]
-  projects(labels: [String], after: String, first: Int, before: String, last: Int): ProjectConnection
-  promotes(after: String, first: Int, before: String, last: Int): ProjectConnection
-  project(id: ID!): Project
-}
-
-input CreateProjectInput {
-  password: String!
-  name: String!
-  index: String
-  order: String
-  category: String
-  promote: String
-  location: String
+type Action {
   type: String
-  area: String
-  status: String
-  labels: [String]
-  segments: [SegmentInput]
+  args: String
+  findType: String
+  findArgs: String
+}
+
+type ActionFindType {
+  name: String
+  regex: String
+  help: String
+}
+
+input ActionInput {
+  type: String!
+  args: String
+  findType: String
+  findArgs: String
+}
+
+type ActionType {
+  name: String
+  args: Boolean
+  regex: String
+  help: String
+  needTarget: Boolean
+}
+
+type AppVersion {
+  version: String
+  download: String
+}
+
+input CreateParameterInput {
+  userId: ID!
+  key: String!
+  value: String
   clientMutationId: String!
 }
 
-type CreateProjectPayload {
-  projectEdge: ProjectEdge
-  app: App
+type CreateParameterPayload {
+  parameterEdge: ParameterEdge
   clientMutationId: String!
+}
+
+input CreateReportInput {
+  userId: ID!
+  startTime: String!
+  endTime: String!
+  platform: String!
+  platformVersion: String!
+  packageName: String!
+  labels: [LabelInput]
+  records: [ScriptRecordInput]
+  clientMutationId: String!
+}
+
+type CreateReportPayload {
+  reportEdge: ReportEdge
+  clientMutationId: String!
+}
+
+input CreateScriptInput {
+  userId: ID!
+  title: String!
+  labels: [ID]
+  actions: [ActionInput]
+  clientMutationId: String!
+}
+
+type CreateScriptPayload {
+  scriptEdge: ScriptEdge
+  clientMutationId: String!
+}
+
+type Label {
+  id: ID!
+  name: String
+  color: String
+}
+
+input LabelInput {
+  name: String!
+  color: String!
 }
 
 type Mutation {
-  updateApp(input: UpdateAppInput!): UpdateAppPayload
-  createProject(input: CreateProjectInput!): CreateProjectPayload
-  updateProject(input: UpdateProjectInput!): UpdateProjectPayload
-  removeProject(input: RemoveProjectInput!): RemoveProjectPayload
+  createScript(input: CreateScriptInput!): CreateScriptPayload
+  updateScript(input: UpdateScriptInput!): UpdateScriptPayload
+  removeScript(input: RemoveScriptInput!): RemoveScriptPayload
+  createParameter(input: CreateParameterInput!): CreateParameterPayload
+  updateParameter(input: UpdateParameterInput!): UpdateParameterPayload
+  removeParameter(input: RemoveParameterInput!): RemoveParameterPayload
+  createReport(input: CreateReportInput!): CreateReportPayload
+  removeReport(input: RemoveReportInput!): RemoveReportPayload
 }
 
 type PageInfo {
@@ -45,97 +102,142 @@ type PageInfo {
   endCursor: String
 }
 
-type Project {
-  id: ID
-  name: String
-  index: String
-  order: String
-  category: String
-  promote: String
-  location: String
-  type: String
-  area: String
-  status: String
-  banner: String
-  thumbnail: String
-  labels: [String]
-  segments: [Segment]
+type Parameter {
+  id: ID!
+  key: String
+  value: String
+  date: String
 }
 
-type ProjectConnection {
+type ParameterConnection {
   pageInfo: PageInfo!
-  edges: [ProjectEdge]
+  edges: [ParameterEdge]
 }
 
-type ProjectEdge {
-  node: Project
+type ParameterEdge {
+  node: Parameter
   cursor: String!
 }
 
 type Query {
-  app: App
+  user(username: String!, password: String!): User
+  versions: [AppVersion]
 }
 
-input RemoveProjectInput {
-  password: String!
+input RemoveParameterInput {
   id: ID!
   clientMutationId: String!
 }
 
-type RemoveProjectPayload {
-  deletedProjectId: String
-  app: App
+type RemoveParameterPayload {
+  deletedId: String
   clientMutationId: String!
 }
 
-type Segment {
-  title: String
-  content: String
-  images: [String]
-  mode: String
-}
-
-input SegmentInput {
-  title: String
-  content: String
-  images: [String]
-  mode: String
-}
-
-input UpdateAppInput {
-  password: String!
-  bannerCount: Int
-  categories: [String]
-  labels: [String]
-  projectTypes: [String]
-  clientMutationId: String!
-}
-
-type UpdateAppPayload {
-  app: App
-  clientMutationId: String!
-}
-
-input UpdateProjectInput {
-  password: String!
+input RemoveReportInput {
   id: ID!
-  name: String
-  order: String
-  category: String
-  index: String
-  promote: String
-  location: String
-  type: String
-  area: String
-  status: String
-  banner: String
-  thumbnail: String
-  labels: [String]
-  segments: [SegmentInput]
   clientMutationId: String!
 }
 
-type UpdateProjectPayload {
-  project: Project
+type RemoveReportPayload {
+  deletedId: ID
   clientMutationId: String!
+}
+
+input RemoveScriptInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type RemoveScriptPayload {
+  deletedId: ID
+  clientMutationId: String!
+}
+
+type Report {
+  id: ID!
+  startTime: String
+  endTime: String
+  platform: String
+  platformVersion: String
+  packageName: String
+  scripts: [ScriptRecord]
+  labels: [Label]
+}
+
+type ReportConnection {
+  pageInfo: PageInfo!
+  edges: [ReportEdge]
+}
+
+type ReportEdge {
+  node: Report
+  cursor: String!
+}
+
+type Script {
+  id: ID!
+  title: String
+  date: String
+  labels: [Label]
+  actions: [Action]
+}
+
+type ScriptConnection {
+  pageInfo: PageInfo!
+  edges: [ScriptEdge]
+}
+
+type ScriptEdge {
+  node: Script
+  cursor: String!
+}
+
+type ScriptRecord {
+  title: String
+  labels: [Label]
+  actions: [String]
+}
+
+input ScriptRecordInput {
+  title: String
+  labels: [LabelInput]
+  actions: [String]
+}
+
+input UpdateParameterInput {
+  id: ID!
+  value: String!
+  clientMutationId: String!
+}
+
+type UpdateParameterPayload {
+  parameter: Parameter
+  clientMutationId: String!
+}
+
+input UpdateScriptInput {
+  id: ID!
+  title: String
+  labels: [ID]
+  actions: [ActionInput]
+  clientMutationId: String!
+}
+
+type UpdateScriptPayload {
+  script: Script
+  clientMutationId: String!
+}
+
+type User {
+  id: ID!
+  scripts(search: String, after: String, first: Int, before: String, last: Int): ScriptConnection
+  parameters(search: String, after: String, first: Int, before: String, last: Int): ParameterConnection
+  reports(search: String, after: String, first: Int, before: String, last: Int): ReportConnection
+  labels(search: String): [Label]
+  actionTypes: [ActionType]
+  findTypes: [ActionFindType]
+  script(id: ID!): Script
+  parameter(id: ID!): Parameter
+  report(id: ID!): Report
 }

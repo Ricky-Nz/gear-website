@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLObjectType } from 'graphql';
+import { GraphQLString, GraphQLObjectType, GraphQLList } from 'graphql';
 import GraphQLLabel from './GraphQLLabel';
 
 export default new GraphQLObjectType({

@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import GraphQLScriptRecord from './GraphQLScriptRecord';
 import GraphQLLabel from './GraphQLLabel';

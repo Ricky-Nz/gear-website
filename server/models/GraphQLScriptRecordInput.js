@@ -1,7 +1,8 @@
-import { GraphQLString, GraphQLInputObjectType } from 'graphql';
+import { GraphQLString, GraphQLInputObjectType, GraphQLList } from 'graphql';
+import GraphQLLabelInput from './GraphQLLabelInput';
 
 export default new GraphQLInputObjectType({
-	name: 'ScriptRecord',
+	name: 'ScriptRecordInput',
 	description: 'Script run record',
 	fields: () => ({
 		title: {
@@ -9,7 +10,7 @@ export default new GraphQLInputObjectType({
 			description: 'run script title'
 		},
 		labels: {
-			type: new GraphQLList(GraphQLLabel),
+			type: new GraphQLList(GraphQLLabelInput),
 			description: 'run script labels'
 		},
 		actions: {
