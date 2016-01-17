@@ -24,7 +24,7 @@
     "graphql": "^0.4.14",
     "graphql-relay": "^0.3.6",
     "history": "^1.17.0",
-    "material-ui": "^0.14.0-rc2",
+    "material-ui": "^0.14.2",
     "mongoose": "^4.3.0",
     "multer": "^1.1.0",
     "react": "^0.14.6",
